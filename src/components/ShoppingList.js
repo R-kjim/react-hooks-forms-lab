@@ -4,6 +4,14 @@ import Filter from "./Filter";
 import Item from "./Item";
 
 function ShoppingList({ items }) {
+  //use states to update our items dataset
+  const [datas,handleDatas]=useState(items)
+  //function that updates our array
+  function updateArray(element){
+    handleDatas([...datas,element])
+  }
+
+
   const [selectedCategory, setSelectedCategory] = useState("All");
 
 
@@ -15,10 +23,7 @@ function ShoppingList({ items }) {
   function handleCategoryChange(event) {
     setSelectedCategory(event.target.value);
   }
-  //function that updates our array
-  function updateArray(element){
-    items=[...items,element]
-  }
+  
   //function to handle the displays
   function displayItem(item){
     let x=item.name.toLowerCase()
@@ -27,7 +32,7 @@ function ShoppingList({ items }) {
     else if(x.includes(searchName.toLowerCase())) return item.name
     else if(selectedCategory==="All" && searchName==='testing') return true
   }
-  const itemsToDisplay=items.filter(displayItem)
+  const itemsToDisplay=datas.filter(displayItem)
 
   
 
